@@ -41,57 +41,12 @@ cp -r ~/.hermes/skills ~/.hermes/skills-backup
 hermes --version
 mnemosyne stats
 ```
-
----
-
-## Directory Structure
-
-```
-hermes-vapt-agent/
-├── README.md                          # You are here
-├── docs/
-│   ├── 01-skill-architecture.md       # Skill setup, curation, quality
-│   ├── 02-workflow-enforcement.md     # Verification loops, goal locking, discipline
-│   ├── 03-memory-optimization.md      # Mnemosyne setup, memory strategy, banks
-│   └── 04-operational-discipline.md   # Safety, autonomy levels, pitfalls
-├── prompts/
-│   ├── vapt-mode.txt                  # VAPT engagement prompt
-│   ├── ctf-mode.txt                   # CTF challenge prompt
-│   ├── source-review-mode.txt         # Source code review prompt
-│   ├── logic-flaw-mode.txt            # Business logic flaw hunting prompt
-│   ├── skill-curation.txt             # Prompt for generating new skills
-│   └── memory-summary.txt             # Prompt for periodic memory consolidation
-```
-
----
-
 ## Setup Phases
 
 Run these in order. Each phase is documented in detail in the `docs/` directory.
 
 ### 1. Skill Architecture
 See `docs/01-skill-architecture.md`
-
-```bash
-# Organize skills into categories
-mkdir -p ~/.hermes/skills/{core,recon,web,api,ad,linux,ctf,workflows,custom}
-
-# Install hack-skills (yaklang)
-cd /tmp && git clone https://github.com/yaklang/hack-skills.git
-cp -r hack-skills/skills/* ~/.hermes/skills/
-rm -rf /tmp/hack-skills
-
-# Install Jay Patel's skills
-cd /tmp && git clone https://github.com/Jay-Patel-9/Hermes-Skills.git
-cp -r Hermes-Skills/skills/* ~/.hermes/skills/
-rm -rf /tmp/Hermes-Skills
-
-# Audit third-party skills for injection/backdoors
-grep -r "ignore previous\|disregard\|forget instructions\| OVERRIDE" ~/.hermes/skills/
-
-# Count installed skills
-find ~/.hermes/skills -name "SKILL.md" | wc -l
-```
 
 ## Your Endgame Architecture
 
