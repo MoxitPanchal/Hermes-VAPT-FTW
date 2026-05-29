@@ -69,7 +69,7 @@ hermes-vapt-agent/
 
 Run these in order. Each phase is documented in detail in the `docs/` directory.
 
-### Phase 1 — Skill Architecture
+### 1. Skill Architecture
 See `docs/01-skill-architecture.md`
 
 ```bash
@@ -93,47 +93,6 @@ grep -r "ignore previous\|disregard\|forget instructions\| OVERRIDE" ~/.hermes/s
 find ~/.hermes/skills -name "SKILL.md" | wc -l
 ```
 
-### Phase 2 — Workflow Enforcement
-See `docs/02-workflow-enforcement.md`
-
-```bash
-# Verify core workflow skills are present
-ls ~/.hermes/skills/core/  # enumeration-first, verify-findings, rabbit-hole-detection, etc.
-ls ~/.hermes/skills/workflows/  # session-summary, attack-tree-tracker, etc.
-```
-
-### Phase 3 — Memory Optimization (Mnemosyne)
-See `docs/03-memory-optimization.md`
-
-```bash
-# Install and configure Mnemosyne
-pip install mnemosyne-memory mnemosyne-hermes
-hermes config set memory.provider mnemosyne
-hermes memory setup
-hermes tools disable memory  # disable built-in to avoid duplication
-
-# Test memory
-mnemosyne remember "Test: Hermes VAPT agent memory is working"
-mnemosyne recall "test"
-mnemosyne stats
-```
-
-### Phase 4 — Load Operational Prompt
-See `prompts/` directory for full prompts.
-
-```bash
-# For VAPT engagements — paste into your Hermes session
-cat prompts/vapt-mode.txt
-
-# For CTF challenges
-cat prompts/ctf-mode.txt
-
-# For source code review
-cat prompts/source-review-mode.txt
-```
-
----
-
 ## Your Endgame Architecture
 
 ```
@@ -152,20 +111,4 @@ Hermes Agent
  ├── Verification Loops (verify-findings, agent-verification-loops)
  ├── Goal Locking (prevents task drift)
  └── Operational Prompts (VAPT/CTF/Source Review discipline)
-```
-
----
-
-## Security Warning
-
-**Audit all third-party skills before use.** Recent research shows:
-- Malicious SKILL.md files with hidden prompt injection
-- Skill backdoors that override safety constraints
-- Semantic manipulation attacks against agent skills
-
-```bash
-# Always audit before trusting
-grep -riE "(ignore previous|disregard|forget instructions|OVERRIDE|system prompt)" ~/.hermes/skills/
-# Review shell commands in skills
-grep -r "bash\|sh\|exec\|eval\|subprocess\|os.system" ~/.hermes/skills/
 ```
